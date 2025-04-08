@@ -1,47 +1,85 @@
-# pping
+# pping-go
 
-A Python-based utility to simulate ping using TCP on specific open ports. This tool is particularly useful in environments where ICMP packets are disabled for security reasons. 
+A blazing fast TCP-based ping utility written in Go. Ideal for networks where ICMP is restricted or blocked. Works smoothly on Windows, macOS, and Linux.
 
-## Features
+## ⚡ Features
 
 - Ping a host and port using TCP.
-- Check if specific applications are working properly.
+- Determine if a specific service is reachable.
 - Specify the number of pings to send.
-- Set the interval between pings.
+- Control the interval between pings.
+- Lightweight and dependency-free (except for Go stdlib).
+- Cross-platform compatibility (builds on all major OSes).
 
-## Usage
+## 📦 Installation
 
-```bash
-usage: pping.py [-h] [-n N] [-c C] host [port]
+Make sure you have Go installed (https://golang.org/dl).
 
-Ping a host and port using TCP
+To install:
 
-positional arguments:
-  host        The host to ping
-  port        The port to ping (default: 80)
+1. Clone this repo:
+```
+git clone https://github.com/yourusername/pping-go.git
+```
+2. Navigate into the directory:
+```
+cd pping-go
+```
+3. Build it:
+```
+5. go build -o pping pong.go
+```
+You’ll get a binary named `pping` (or `pping.exe` on Windows) in the current directory.
 
-options:
-  -h, --help  Show this help message and exit
-  -n N        Number of pings to send (default: indefinitely)
-  -c C        Interval between pings in seconds (default: 1, min: 0.1)
+## 🚀 Usage
+
+Basic usage:
+```
+./pping example.com 80
 ```
 
-## Installation
-
-To use `pping`, you need Python installed on your system. You can install the required dependencies using pip:
-
-```bash
-pip install -r requirements.txt
+Ping with a custom interval:
+```
+./pping example.com 443 -c 0.5
 ```
 
-## Example
-Ping a host on the default port 80:
-
-```bash
-python pping.py example.com
+Send a specific number of pings:
+```
+./pping example.com 443 -n 10
 ```
 
-Ping a host on port 443:
-```bash
-python pping.py example.com 443
+## ⛏ Arguments
+
+positional:
+- host: The target hostname or IP address.
+- port: The TCP port to check (default: 80)
+
+flags:
+- -n: Number of times to ping (default: infinite)
+- -c: Interval between pings in seconds (default: 1s, minimum: 0.1s)
+
+## 🔥 Example
+
+Ping google.com on port 443 every 0.5 seconds, 5 times:
 ```
+./pping google.com 443 -n 5 -c 0.5
+```
+## 💬 Why Go?
+
+- Fast and compiled
+- Portable across platforms
+- Perfect for system utilities
+
+## 🧠 Pro Tip
+
+You can cross-compile for another OS easily:
+```
+GOOS=windows GOARCH=amd64 go build -o pping.exe pong.go
+```
+## 🛠 Dependencies
+
+None. Everything runs on Go's standard library.
+
+## 🐛 Got Issues?
+
+Open one on the repo or hit me up at hello@brainifii.com
